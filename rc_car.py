@@ -104,8 +104,10 @@ for event in gamepad.read_loop():
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
-        last[ axis[ event.code ] ] = event.value
-        value = event.value - center[ axis[ event.code ] ]
+        # last[ axis[ event.code ] ] = event.value
+        # value = event.value - center[ axis[ event.code ] ]
+
+        value = event.value
         if abs( value ) <= CENTER_TOLERANCE:
             value = 0
             turnMotor.throttle = value
