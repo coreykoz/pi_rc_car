@@ -110,7 +110,7 @@ for event in gamepad.read_loop():
         if abs( value ) <= CENTER_TOLERANCE:
             value = 0
         if axis[ecodes.ABS_X]:
-            turnMotor.throttle = turnScale * value
+            turnMotor.throttle = turnScale * (value / (STICK_MAX / 2))
         # if axis[ event.code ] in [ 'ls_x', 'ls_y', 'rs_x', 'rs_y']:
         #     last[ axis[ event.code ] ] = event.value
 
