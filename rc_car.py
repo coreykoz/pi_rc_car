@@ -23,12 +23,13 @@ print(gamepad)
 #evdev takes care of polling the controller in a loop
 for event in gamepad.read_loop():
     if event.type == ecodes.EV_KEY:
+        print(event)
         if event.value == 1:
             if event.code == aBtn:
-                print("A")
+                print("A Down")
             elif event.code == bBtn:
-                print("B")
+                print("B Down")
             elif event.code == yBtn:
-                print("Y")
+                print("Y Down")
             elif event.code == xBtn:
-                print("X")
+                print("X Down")
