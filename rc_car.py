@@ -119,6 +119,6 @@ for event in gamepad.read_loop():
 
             elif axis[ event.code ] == 'ls_y':
                 if value < 0:
-                    print('left: ' + value)
+                    print('left: ' + str(value))
                 elif value > 0:
-                    print('right: ' + value)
+                    print('right: ' + str(value))
