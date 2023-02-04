@@ -24,6 +24,9 @@ kit = MotorKit()
 driverMotor = kit.motor2
 turnMotor = kit.motor1
 
+gasScale = .5
+turnScale = .5
+
 CENTER_TOLERANCE = 350
 STICK_MAX = 65536
 
@@ -96,13 +99,18 @@ for event in gamepad.read_loop():
 
         # CAR DRIVING
         if gasBtnStatus:
-            driverMotor.throttle = -.25
+            driverMotor.throttle = gasScale * -.25
         else:
             driverMotor.throttle = 0
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
-        print(str(event))
+        last[ axis[ event.code ] ] = event.value
+        value = event.value - center[ axis[ event.code ] ]
+        if abs( value ) <= CENTER_TOLERANCE:
+            value = 0
+        if axis[ecodes.ABS_X]:
+            turnMotor.throttle = turnScale * value
         # if axis[ event.code ] in [ 'ls_x', 'ls_y', 'rs_x', 'rs_y']:
         #     last[ axis[ event.code ] ] = event.value
 
