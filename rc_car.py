@@ -59,6 +59,6 @@ for event in gamepad.read_loop():
 
         # CAR DRIVING
         if gasBtnStatus:
-            driverMotor.throttle = .1
+            driverMotor.throttle = .5
         else:
             driverMotor.throttle = 0
