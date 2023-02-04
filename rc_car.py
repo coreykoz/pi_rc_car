@@ -22,8 +22,8 @@ gasBtnStatus = False
 
 #Motorkit stuff
 kit = MotorKit()
-driverMotor = kit.motor1
-turnMotor = kit.motor2
+driverMotor = kit.motor2
+turnMotor = kit.motor1
 
 
 #prints out device info at start
