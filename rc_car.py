@@ -64,7 +64,6 @@ print(gamepad)
 #evdev takes care of polling the controller in a loop
 for event in gamepad.read_loop():
     if event.type == ecodes.EV_KEY:
-
         # on button press
         if event.value == 1:
             if event.code == aBtn:
@@ -109,8 +108,10 @@ for event in gamepad.read_loop():
         value = event.value - center[ axis[ event.code ] ]
         if abs( value ) <= CENTER_TOLERANCE:
             value = 0
+            turnMotor.throttle = value
         if axis[ecodes.ABS_X]:
-            turnMotor.throttle = turnScale * (value / (STICK_MAX / 2))
+            turnResult = turnScale * (value / (STICK_MAX / 2))
+            print(turnResult)
         # if axis[ event.code ] in [ 'ls_x', 'ls_y', 'rs_x', 'rs_y']:
         #     last[ axis[ event.code ] ] = event.value
 
