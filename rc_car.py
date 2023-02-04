@@ -102,23 +102,24 @@ for event in gamepad.read_loop():
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
-        if axis[ event.code ] in [ 'ls_x', 'ls_y', 'rs_x', 'rs_y']:
-            last[ axis[ event.code ] ] = event.value
+        print(event.value)
+        # if axis[ event.code ] in [ 'ls_x', 'ls_y', 'rs_x', 'rs_y']:
+        #     last[ axis[ event.code ] ] = event.value
 
-            value = event.value - center[ axis[ event.code ] ]
+        #     value = event.value - center[ axis[ event.code ] ]
 
-            if abs( value ) <= CENTER_TOLERANCE:
-                value = 0
+        #     if abs( value ) <= CENTER_TOLERANCE:
+        #         value = 0
 
-            # if axis[ event.code ] == 'rs_x':
-            #     if value < 0:
-            #         print('left')
-            #     else:
-            #         print('right')
-            #     print( value )
+        #     # if axis[ event.code ] == 'rs_x':
+        #     #     if value < 0:
+        #     #         print('left')
+        #     #     else:
+        #     #         print('right')
+        #     #     print( value )
 
-            elif axis[ event.code ] == 'ls_y':
-                if value < 0:
-                    print('left: ' + str(value))
-                elif value > 0:
-                    print('right: ' + str(value))
+        #     elif axis[ event.code ] == 'ls_y':
+        #         if value < 0:
+        #             print('left: ' + str(value))
+        #         elif value > 0:
+        #             print('right: ' + str(value))
