@@ -28,13 +28,7 @@ for event in gamepad.read_loop():
                 print("A")
             elif event.code == bBtn:
                 print("B")
-            elif event.code == playpause:
-                print("Play/Pause")
-            elif event.code == up:
-                print("up")
-            elif event.code == down:
-                print("down")
-            elif event.code == left:
-                print("left")
-            elif event.code == right:
-                print("right")
+            elif event.code == yBtn:
+                print("Y")
+            elif event.code == xBtn:
+                print("X")
