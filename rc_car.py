@@ -24,12 +24,25 @@ print(gamepad)
 for event in gamepad.read_loop():
     if event.type == ecodes.EV_KEY:
         print(event)
+
+        # on button press
         if event.value == 1:
             if event.code == aBtn:
-                print("A Down")
+                print("A Pressed")
             elif event.code == bBtn:
-                print("B Down")
+                print("B Pressed")
             elif event.code == yBtn:
-                print("Y Down")
+                print("Y Pressed")
             elif event.code == xBtn:
-                print("X Down")
+                print("X Pressed")
+
+        #on button release
+        elif event.value == 0:
+            if event.code == aBtn:
+                print("A Released")
+            elif event.code == bBtn:
+                print("B Released")
+            elif event.code == yBtn:
+                print("Y Released")
+            elif event.code == xBtn:
+                print("X Released")
