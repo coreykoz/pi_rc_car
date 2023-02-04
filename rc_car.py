@@ -102,7 +102,7 @@ for event in gamepad.read_loop():
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
-        print(str(event.code) + str(event.value))
+        print(str(event))
         # if axis[ event.code ] in [ 'ls_x', 'ls_y', 'rs_x', 'rs_y']:
         #     last[ axis[ event.code ] ] = event.value
 
