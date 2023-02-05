@@ -44,9 +44,15 @@ for event in gamepad.read_loop():
                 gearToggle = not gearToggle
          
         #on button release
-        elif event.value == 0:
-            if event.code == aBtn:
-                print("A Released")
+        # elif event.value == 0:
+        #     if event.code == aBtn:
+        #         print("A Released")
+
+        #Switching gear
+        if gearToggle:
+            gear = -1
+        else:
+            gear = 1
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
@@ -61,7 +67,7 @@ for event in gamepad.read_loop():
 
         # GAS PEDAL
         if event.code == ecodes.ABS_RZ:
-            throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2))
+            throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
             print(throttleResult)
             driverMotor.throttle = throttleResult
 
