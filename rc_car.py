@@ -18,6 +18,7 @@ startBtn = 315
 shareBtn = 314
 
 gasBtnStatus = False
+reverseBtnStatus = False
 
 #Motorkit stuff
 kit = MotorKit()
@@ -25,7 +26,7 @@ driverMotor = kit.motor2
 turnMotor = kit.motor1
 
 gasScale = .5
-turnScale = .5
+turnScale = 1
 
 CENTER_TOLERANCE = 350
 STICK_MAX = 65536
@@ -41,8 +42,11 @@ for event in gamepad.read_loop():
             if event.code == aBtn:
                 print("A Pressed")
                 gasBtnStatus = True
+                reverseBtnStatus = False
             elif event.code == bBtn:
                 print("B Pressed")
+                gasBtnStatus = False
+                reverseBtnStatus = True
             elif event.code == yBtn:
                 print("Y Pressed")
             elif event.code == xBtn:
@@ -60,17 +64,11 @@ for event in gamepad.read_loop():
             elif event.code == xBtn:
                 print("X Released")
 
-        # calibrate zero on Y button
-        if event.code == yBtn:
-            center['ls_x'] = last['ls_x']
-            center['ls_y'] = last['ls_y']
-            center['rs_x'] = last['rs_x']
-            center['rs_y'] = last['rs_y']
-            print( 'calibrated' )
-
         # CAR DRIVING
         if gasBtnStatus:
             driverMotor.throttle = gasScale * -1
+        elif reverseBtnStatus:
+            driverMotor.throttle = gasScale * 1
         else:
             driverMotor.throttle = 0
 
