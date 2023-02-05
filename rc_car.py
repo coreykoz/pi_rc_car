@@ -59,6 +59,7 @@ for event in gamepad.read_loop():
                 gasBtnStatus = False
             elif event.code == bBtn:
                 print("B Released")
+                reverseBtnStatus = False
             elif event.code == yBtn:
                 print("Y Released")
             elif event.code == xBtn:
