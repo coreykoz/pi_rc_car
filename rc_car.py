@@ -29,7 +29,7 @@ turnScale = 1
 gear = -1
 
 CENTER_TOLERANCE = 350
-TRIGGER_TOLERANCE = 0
+TRIGGER_TOLERANCE = 375
 STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
@@ -66,7 +66,10 @@ for event in gamepad.read_loop():
 
         # GAS PEDAL
         if event.code == ecodes.ABS_RZ:
-            throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
+            if abs( event.value ) <= TRIGGER_TOLERANCE:
+                throttleResult = 0
+            else:
+                throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
             print(throttleResult, event.value)
             driverMotor.throttle = throttleResult
 
