@@ -29,6 +29,7 @@ turnScale = 1
 gear = -1
 
 CENTER_TOLERANCE = 350
+TRIGGER_TOLERANCE = 
 STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
@@ -41,18 +42,15 @@ for event in gamepad.read_loop():
         # on button press
         if event.value == 1:
             if event.code == aBtn:
-                print("Shift Gear")
                 gearToggle = not gearToggle
          
-        #on button release
-        # elif event.value == 0:
-        #     if event.code == aBtn:
-        #         print("A Released")
 
         #Switching gear
         if gearToggle:
+            print("Shifted Gear: Drive")
             gear = -1
         else:
+            print("Shifted Gear: Reverse")
             gear = 1
 
      #read stick axis movement
@@ -69,7 +67,7 @@ for event in gamepad.read_loop():
         # GAS PEDAL
         if event.code == ecodes.ABS_RZ:
             throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
-            print(throttleResult)
+            print(throttleResult, event.value)
             driverMotor.throttle = throttleResult
 
         
