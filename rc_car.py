@@ -24,7 +24,7 @@ kit = MotorKit()
 driverMotor = kit.motor2
 turnMotor = kit.motor1
 
-gasScale = .5
+gasScale = .25
 turnScale = 1
 gear = -1
 
