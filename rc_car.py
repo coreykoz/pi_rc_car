@@ -62,6 +62,7 @@ for event in gamepad.read_loop():
         # GAS PEDAL
         if event.code == ecodes.ABS_RZ:
             throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2))
+            print(throttleResult)
             driverMotor.throttle = throttleResult
 
         
