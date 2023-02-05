@@ -26,6 +26,7 @@ turnMotor = kit.motor1
 
 gasScale = .5
 turnScale = 1
+gear = -1
 
 CENTER_TOLERANCE = 350
 STICK_MAX = 65536
