@@ -17,8 +17,7 @@ lBumper = 310
 startBtn = 315
 shareBtn = 314
 
-gasBtnStatus = False
-reverseBtnStatus = False
+gearToggle = True #if true = gas, false = reverse
 
 #Motorkit stuff
 kit = MotorKit()
@@ -30,6 +29,7 @@ turnScale = 1
 
 CENTER_TOLERANCE = 350
 STICK_MAX = 65536
+TRIGGER_MAX = 1023
 
 #prints out device info at start
 print(gamepad)
@@ -40,48 +40,28 @@ for event in gamepad.read_loop():
         # on button press
         if event.value == 1:
             if event.code == aBtn:
-                print("A Pressed")
-                gasBtnStatus = True
-                reverseBtnStatus = False
-            elif event.code == bBtn:
-                print("B Pressed")
-                gasBtnStatus = False
-                reverseBtnStatus = True
-            elif event.code == yBtn:
-                print("Y Pressed")
-            elif event.code == xBtn:
-                print("X Pressed")
-
+                print("Shift Gear")
+                gearToggle = not gearToggle
+         
         #on button release
         elif event.value == 0:
             if event.code == aBtn:
                 print("A Released")
-                gasBtnStatus = False
-            elif event.code == bBtn:
-                print("B Released")
-                reverseBtnStatus = False
-            elif event.code == yBtn:
-                print("Y Released")
-            elif event.code == xBtn:
-                print("X Released")
-
-        # CAR DRIVING
-        if gasBtnStatus:
-            driverMotor.throttle = gasScale * -1
-        elif reverseBtnStatus:
-            driverMotor.throttle = gasScale * 1
-        else:
-            driverMotor.throttle = 0
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
-        value = event.value
-        if abs( value ) <= CENTER_TOLERANCE:
-            value = 0
-            turnMotor.throttle = value
+
+        # TURNING
         if event.code == ecodes.ABS_X:
-            turnResult = turnScale * (value / (STICK_MAX / 2))
-            print(turnResult)
+            if abs( event.value ) <= CENTER_TOLERANCE:
+                turnResult = 0
+            else:
+                turnResult = turnScale * ( event.value / (STICK_MAX / 2))
             turnMotor.throttle = turnResult
+
+        # GAS PEDAL
+        if event.code == ecodes.ABS_RZ:
+            throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2))
+            driverMotor.throttle = throttleResult
 
         
