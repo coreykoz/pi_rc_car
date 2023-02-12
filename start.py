@@ -1,7 +1,7 @@
 #import evdev
 from evdev import InputDevice, categorize, ecodes, list_devices
 from car_controls import RCCar
-import camera_server
+import camera_serverv2
 
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
