@@ -35,6 +35,7 @@ fan = kit.motor4
 #if true = gas, false = reverse
 gearToggle = True 
 lightToggle = False
+fanToggle = False
 gasScale = .25
 turnScale = 1
 gear = -1
