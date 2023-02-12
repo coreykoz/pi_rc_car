@@ -1,4 +1,5 @@
 from adafruit_motorkit import MotorKit
+import pigpio
 
 class RCCar:
 
@@ -21,6 +22,9 @@ class RCCar:
         self.gasScale = .25
         self.turnScale = 1
 
+        #enable later
+        #self.turnServo.throttle = 1
+        pi = pigpio.pi()
     
     def toggleLights(self):
         self.lightToggle = not self.lightToggle
@@ -53,6 +57,12 @@ class RCCar:
             self.driveMotor.throttle = throttle * self.gear
         except:
             print("Throttle value needs to be between [-1, 1]:", str(throttle))
+
+
+
+    def turn(self, turnRatio):
+        try:
+            self.turn
     
     
     

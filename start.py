@@ -1,6 +1,7 @@
 #import evdev
 from evdev import InputDevice, categorize, ecodes, list_devices
 from car_controls import RCCar
+import camera_server
 
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
@@ -27,6 +28,9 @@ CENTER_TOLERANCE = 350
 TRIGGER_TOLERANCE = 375
 STICK_MAX = 65536
 TRIGGER_MAX = 1023
+
+# START CAMERA SERVER
+camera_server.CameraServer().start()
 
 # CAR INSTANCE
 car = RCCar(.25, 1)
