@@ -32,7 +32,7 @@ STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
 # START CAMERA SERVER
-Popen('camera_serverv2.py')
+# Popen('camera_serverv2.py')
 
 
 # CAR INSTANCE
