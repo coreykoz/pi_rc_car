@@ -45,7 +45,7 @@ class RCCar:
             self.gear = -1
         else:
             self.gear = 1
-        print("Shifted Gear:", ("Drive" if self.fanToggle else "Reverse"))
+        print("Shifted Gear:", ("Drive" if self.gearToggle else "Reverse"))
 
 
     def accelerate(self, throttle):
