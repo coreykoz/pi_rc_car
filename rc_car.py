@@ -96,6 +96,6 @@ for event in gamepad.read_loop():
                 throttleResult = 0
             # else:
             #     throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
-            driverMotor.throttle = throttleResult
+            driveMotor.throttle = throttleResult
 
         
