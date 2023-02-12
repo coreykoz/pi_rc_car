@@ -3,7 +3,7 @@
 # http://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
 
 import io
-from picamera2 import Picamera2
+from picamera2 import Picamera2, Preview
 import logging
 import socketserver
 from threading import Condition
@@ -83,7 +83,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 class CameraServer:
     def start(self):
-        with picamera2.Picamera2(resolution='640x480', framerate=24) as camera:
+        with Picamera2(resolution='640x480', framerate=24) as camera:
             output = StreamingOutput()
             #Uncomment the next line to change your Pi's Camera rotation (in degrees)
             #camera.rotation = 90
