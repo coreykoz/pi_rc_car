@@ -30,7 +30,7 @@ STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
 # START CAMERA SERVER
-camera_server.CameraServer().start()
+camera_serverv2.CameraServer().start()
 
 # CAR INSTANCE
 car = RCCar(.25, 1)
