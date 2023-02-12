@@ -3,6 +3,7 @@ from evdev import InputDevice, categorize, ecodes, list_devices
 from car_controls import RCCar
 import camera_serverv2
 import os
+from subprocess import Popen
 
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
@@ -31,7 +32,8 @@ STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
 # START CAMERA SERVER
-os.system('camera_serverv2.py')
+Popen('camera_serverv2.py')
+
 
 # CAR INSTANCE
 car = RCCar(.25, 1)
