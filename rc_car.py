@@ -5,8 +5,10 @@ from adafruit_motorkit import MotorKit
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
 gamepad = InputDevice('/dev/input/event1')
+#prints out device info at start
+print(gamepad)
 
-#button code variables
+#controller button code variables
 aBtn = 304
 bBtn = 305
 yBtn = 308
@@ -17,24 +19,27 @@ lBumper = 310
 startBtn = 315
 shareBtn = 314
 
-gearToggle = True #if true = gas, false = reverse
-
-#Motorkit stuff
-kit = MotorKit()
-driverMotor = kit.motor2
-turnMotor = kit.motor1
-
-gasScale = .25
-turnScale = 1
-gear = -1
-
 CENTER_TOLERANCE = 350
 TRIGGER_TOLERANCE = 375
 STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
-#prints out device info at start
-print(gamepad)
+
+#Motorkit init
+kit = MotorKit()
+driveMotor = kit.motor2
+turnServo = kit.motor1
+lights = kit.motor3
+fan = kit.motor4
+
+#if true = gas, false = reverse
+gearToggle = True 
+lightToggle = False
+gasScale = .25
+turnScale = 1
+gear = -1
+
+
 
 #evdev takes care of polling the controller in a loop
 for event in gamepad.read_loop():
@@ -43,6 +48,10 @@ for event in gamepad.read_loop():
         if event.value == 1:
             if event.code == aBtn:
                 gearToggle = not gearToggle
+            if event.code == bBtn:
+                lightToggle = not lightToggle
+            if event.code == xBtn:
+                fanToggle = not fanToggle
          
 
         #Switching gear
@@ -52,6 +61,22 @@ for event in gamepad.read_loop():
         else:
             print("Shifted Gear: Reverse")
             gear = 1
+
+        #Switching lights
+        if lightToggle:
+            print("Lights: On")
+            lights.throttle = -1
+        else:
+            print("Lights: Off")
+            lights.throttle = 0
+
+        #Switching fan
+        if fanToggle:
+            print("Fan: On")
+            fan.throttle = -.8
+        else:
+            print("Fan: Off")
+            fan.throttle = 0
 
      #read stick axis movement
     elif event.type == ecodes.EV_ABS:
