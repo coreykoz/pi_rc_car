@@ -60,9 +60,9 @@ class RCCar:
 
 
 
-    def turn(self, turnRatio):
-        try:
-            self.turn
+    # def turn(self, turnRatio):
+    #     try:
+    #         self.turn
     
     
     
