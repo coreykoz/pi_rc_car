@@ -1,16 +1,18 @@
 #import evdev
 from evdev import InputDevice, categorize, ecodes, list_devices
-from adafruit_motorkit import MotorKit
+from car_controls import RCCar
 
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
 try:
     gamepad = InputDevice('/dev/input/event1')
-except
+except:
+    print("No gamepad detected!")
+
 #prints out device info at start
 print(gamepad)
 
-#controller button code variables
+#controller button code variables (Xbox Series X Controller via Bluetooth)
 aBtn = 304
 bBtn = 305
 yBtn = 308
@@ -26,23 +28,8 @@ TRIGGER_TOLERANCE = 375
 STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
-
-#Motorkit init
-kit = MotorKit()
-driveMotor = kit.motor2
-turnServo = kit.motor1
-lights = kit.motor3
-fan = kit.motor4
-
-#if true = gas, false = reverse
-gearToggle = True 
-lightToggle = False
-fanToggle = False
-gasScale = .25
-turnScale = 1
-gear = -1
-
-
+# CAR INSTANCE
+car = RCCar(.25, 1)
 
 #evdev takes care of polling the controller in a loop
 for event in gamepad.read_loop():
@@ -50,38 +37,14 @@ for event in gamepad.read_loop():
         # on button press
         if event.value == 1:
             if event.code == aBtn:
-                gearToggle = not gearToggle
+                car.shiftGear()
             if event.code == bBtn:
-                lightToggle = not lightToggle
+                car.toggleLights()
             if event.code == xBtn:
-                fanToggle = not fanToggle
-         
+                car.toggleFan()
 
-        #Switching gear
-        if gearToggle:
-            print("Shifted Gear: Drive")
-            gear = -1
-        else:
-            print("Shifted Gear: Reverse")
-            gear = 1
 
-        #Switching lights
-        if lightToggle:
-            print("Lights: On")
-            lights.throttle = -1
-        else:
-            print("Lights: Off")
-            lights.throttle = 0
-
-        #Switching fan
-        if fanToggle:
-            print("Fan: On")
-            fan.throttle = -.8
-        else:
-            print("Fan: Off")
-            fan.throttle = 0
-
-     #read stick axis movement
+    #read stick axis movement
     elif event.type == ecodes.EV_ABS:
 
         # # TURNING
@@ -99,6 +62,6 @@ for event in gamepad.read_loop():
                 throttleResult = 0
             # else:
             #     throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
-            driveMotor.throttle = throttleResult
+            car.accelerate(throttleResult)
 
         
