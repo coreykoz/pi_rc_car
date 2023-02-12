@@ -3,7 +3,7 @@
 # http://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
 
 import io
-from picamera2.encoders import H264Encoder
+from picamera2.encoders import H264Encoder, MJPEGEncoder
 from picamera2 import Picamera2, Preview
 import logging
 import socketserver
@@ -88,7 +88,7 @@ class CameraServer:
             output = StreamingOutput()
             #Uncomment the next line to change your Pi's Camera rotation (in degrees)
             #camera.rotation = 90
-            encoder = H264Encoder(bitrate=10000000)
+            encoder = MJPEGEncoder()
             camera.start_recording(encoder, output)
             try:
                 address = ('', 8000)
