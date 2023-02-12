@@ -50,7 +50,7 @@ class RCCar:
 
     def accelerate(self, throttle):
         try:
-            self.driveMotor.throttle = throttle
+            self.driveMotor.throttle = throttle * self.gear
         except:
             print("Throttle value needs to be between [-1, 1]:", str(throttle))
     
