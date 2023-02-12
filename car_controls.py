@@ -28,7 +28,7 @@ class RCCar:
             self.lights.throttle = -1
         else:
             self.lights.throttle = 0
-        print("Light Status: " + "On" if self.lightToggle else "Off")
+        print("Light Status:", ("On" if self.lightToggle else "Off"))
     
     def toggleFan(self):
         self.fanToggle = not self.fanToggle
@@ -36,7 +36,7 @@ class RCCar:
             self.fan.throttle = -.8
         else:
             self.fan.throttle = 0
-        print("Fan Status: " + "On" if self.fanToggle else "Off")
+        print("Fan Status:", ("On" if self.fanToggle else "Off"))
 
     # Shift between forward and reverse
     def shiftGear(self):
@@ -45,7 +45,7 @@ class RCCar:
             self.gear = -1
         else:
             self.gear = 1
-        print("Shifted Gear: " + "Drive" if self.fanToggle else "Reverse")
+        print("Shifted Gear:", ("Drive" if self.fanToggle else "Reverse"))
 
 
     def accelerate(self, throttle):
