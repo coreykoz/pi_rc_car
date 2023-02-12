@@ -2,7 +2,7 @@
 
 from rpi_hardware_pwm import HardwarePWM
 
-pwm = HardwarePWM(pwm_channel=0, hz=60)
+pwm = HardwarePWM(pwm_channel=1, hz=60)
 pwm.start(100) # full duty cycle
 
 pwm.change_duty_cycle(10)
