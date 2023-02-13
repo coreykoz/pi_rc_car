@@ -37,7 +37,7 @@ class RCCar:
     def toggleFan(self):
         self.fanToggle = not self.fanToggle
         if (self.fanToggle):
-            self.fan.throttle = -.8
+            self.fan.throttle = .8
         else:
             self.fan.throttle = 0
         print("Fan Status:", ("On" if self.fanToggle else "Off"))
