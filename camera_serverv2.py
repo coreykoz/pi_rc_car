@@ -21,7 +21,7 @@ PAGE = """\
 </head>
 <body>
 <h1>Picamera2 MJPEG Streaming Demo</h1>
-<img src="stream.mjpg" width="1920" height="1080" />
+<img src="stream.mjpg" width="1280" height="720" />
 </body>
 </html>
 """

@@ -15,7 +15,7 @@ pi = pigpio.pi()       # pi1 accesses the local Pi's GPIO
 
 pi.hardware_PWM(18, 500, 630000) # 50Hz 25% dutycycle
 
-pi.hardware_PWM(18, 500, 750000) # 2000Hz 75% dutycycle
+pi.hardware_PWM(18, 500, 700000) # 2000Hz 75% dutycycle
 
 
 
