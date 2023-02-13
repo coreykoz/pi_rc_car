@@ -47,14 +47,6 @@ for event in gamepad.read_loop():
     #read stick axis movement
     elif event.type == ecodes.EV_ABS:
 
-        # # TURNING
-        # if event.code == ecodes.ABS_X:
-        #     if abs( event.value ) <= CENTER_TOLERANCE:
-        #         turnResult = 0
-        #     else:
-        #         turnResult = turnScale * ( event.value / (STICK_MAX / 2))
-        #     turnMotor.throttle = turnResult
-
         # GAS PEDAL
         if event.code == ecodes.ABS_RZ:
             throttleResult = car.gasScale * (event.value / (TRIGGER_MAX / 2))
@@ -63,5 +55,14 @@ for event in gamepad.read_loop():
             # else:
             #     throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
             car.accelerate(throttleResult)
+
+        # TURNING
+        if event.code == ecodes.ABS_X:
+            if abs( event.value ) <= CENTER_TOLERANCE:
+                turnResult = 0
+            else:
+                turnResult = turnScale * ( event.value / (STICK_MAX / 2))
+            print(turnResult)
+            
 
         

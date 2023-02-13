@@ -18,13 +18,18 @@ class RCCar:
         self.gasScale = gasScale
         self.gear = -1
 
+        # Servo Hz for Traxxas 6065T
+        self.servoHz = 500
+        self.leftMin = 410000
+        self.rightMin = 990000
+        self.middle = 700000
+
         #remove later
         self.gasScale = .25
         self.turnScale = 1
 
-        #enable later
-        #self.turnServo.throttle = 1
-        pi = pigpio.pi()
+        self.turnServo.throttle = 1
+        self.pi = pigpio.pi()
     
     def toggleLights(self):
         self.lightToggle = not self.lightToggle
@@ -51,7 +56,7 @@ class RCCar:
             self.gear = 1
         print("Shifted Gear:", ("Drive" if self.gearToggle else "Reverse"))
 
-
+    # expects an input from [-1, 1]
     def accelerate(self, throttle):
         try:
             self.driveMotor.throttle = throttle * self.gear
@@ -59,10 +64,16 @@ class RCCar:
             print("Throttle value needs to be between [-1, 1]:", str(throttle))
 
 
-
-    # def turn(self, turnRatio):
-    #     try:
-    #         self.turn
+    # expects an input from [0-1]
+    def turn(self, turnRatio):
+        try:
+            normTurn = self.leftMin + (self.rightMin - self.leftMin) * turnRatio
+            if normTurn <= self.rightMin and normTurn >= self.leftMin:
+                self.pi.hardware_PWM(18, self.servoHz, normTurn)
+            else:
+                print("Turn Ratio value needs to be between [", self.leftMin, ",", self.rightMin, "]:", str(normTurn))
+        except:
+            print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
     
     
     
