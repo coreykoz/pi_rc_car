@@ -68,7 +68,7 @@ class RCCar:
     def turn(self, turnRatio):
         try:
             normTurn = self.leftMin + (self.rightMin - self.leftMin) * turnRatio
-            if normTurn <= 1 and normTurn >= 0:
+            if normTurn <= self.rightMin and normTurn >= self.leftMin:
                 self.pi.hardware_PWM(18, self.servoHz, normTurn)
             else:
                 print("Turn Ratio value needs to be between [", self.leftMin, ",", self.rightMin, "]:", str(normTurn))
