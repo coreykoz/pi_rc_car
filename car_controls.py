@@ -73,8 +73,7 @@ class RCCar:
             else:
                 print("Turn Ratio value needs to be between [", self.leftMin, ",", self.rightMin, "]:", str(normTurn))
         except:
-            print(str(turnRatio), type(turnRatio))
-            #print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
+            print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
     
     
     
