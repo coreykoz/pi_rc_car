@@ -5,6 +5,7 @@ import time
 
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
+print("Connecting a gamepad...")
 while(True):
     try:
         time.sleep(3)
@@ -71,6 +72,3 @@ for event in gamepad.read_loop():
                 lower, upper = -1, 1
                 turnResult = (turnResult - lower) / (upper - lower)
             car.turn(turnResult)
-            
-
-        
