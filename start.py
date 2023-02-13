@@ -64,7 +64,7 @@ for event in gamepad.read_loop():
                 turnResult = ( event.value / (STICK_MAX / 2))
                 lower, upper = -1, 1
                 turnResult = (turnResult - lower) / (upper - lower)
-            print(turnResult)
+            car.turn(turnResult)
             
 
         
