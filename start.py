@@ -15,6 +15,7 @@ while(True):
         print("No gamepad detected!")
 
 #prints out device info at start
+print("Starting RC Car!")
 print(gamepad)
 
 #controller button code variables (Xbox Series X Controller via Bluetooth)
