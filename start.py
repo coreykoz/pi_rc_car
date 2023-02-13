@@ -1,13 +1,18 @@
 #import evdev
 from evdev import InputDevice, categorize, ecodes, list_devices
 from car_controls import RCCar
+import time
 
 #creates object 'gamepad' to store the data
 #you can call it whatever you like
-try:
-    gamepad = InputDevice('/dev/input/event1')
-except:
-    print("No gamepad detected!")
+while(True):
+    try:
+        time.sleep(3)
+        gamepad = InputDevice('/dev/input/event1')
+        if (gamepad):
+            break
+    except:
+        print("No gamepad detected!")
 
 #prints out device info at start
 print(gamepad)
