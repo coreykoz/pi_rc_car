@@ -62,8 +62,8 @@ for event in gamepad.read_loop():
                 turnResult = .5
             else:
                 turnResult = ( event.value / (STICK_MAX / 2))
-                lower, upper = 0, 1
-                turnResult = lower + (upper - lower) * abs(turnResult)
+                lower, upper = -1, 1
+                turnResult = (turnResult - lower) / (upper - lower)
             print(turnResult)
             
 
