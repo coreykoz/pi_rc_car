@@ -59,9 +59,11 @@ for event in gamepad.read_loop():
         # TURNING
         if event.code == ecodes.ABS_X:
             if abs( event.value ) <= CENTER_TOLERANCE:
-                turnResult = 0
+                turnResult = car.middle
             else:
                 turnResult = ( event.value / (STICK_MAX / 2))
+                lower, upper = 0, 1
+                turnNorrm = lower + (upper - lower) * turnResult
             print(turnResult)
             
 
