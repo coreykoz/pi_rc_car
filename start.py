@@ -61,7 +61,7 @@ for event in gamepad.read_loop():
             if abs( event.value ) <= CENTER_TOLERANCE:
                 turnResult = 0
             else:
-                turnResult = turnScale * ( event.value / (STICK_MAX / 2))
+                turnResult = ( event.value / (STICK_MAX / 2))
             print(turnResult)
             
 
