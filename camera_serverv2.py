@@ -88,8 +88,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 picam2 = Picamera2()
 cam_rotate = picam2.create_video_configuration(main={"size": (1280, 720)})
 cam_rotate["transform"] = libcamera.Transform(hflip=1, vflip=1)
-picam2.configure()
-picam2.
+picam2.configure(cam_rotate)
 output = StreamingOutput()
 picam2.start_recording(JpegEncoder(), FileOutput(output))
 
