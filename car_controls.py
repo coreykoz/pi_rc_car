@@ -1,15 +1,16 @@
 from adafruit_motorkit import MotorKit
 import pigpio
+from gpiozero import LED
 
 class RCCar:
 
     #Motorkit init
-    def __init__(self, gasScale, turnScale):
+    def __init__(self, gasScale, turnScale, lightsGPIONum):
         self.kit = MotorKit()
         self.driveMotor = self.kit.motor2
-        self.turnServo = self.kit.motor1
-        self.lights = self.kit.motor3
-        self.fan = self.kit.motor4
+        self.turnServo = self.kit.motor4
+        #self.lights = self.kit.motor3
+        #self.fan = self.kit.motor4
 
         self.gearToggle = True 
         self.lightToggle = False
@@ -17,6 +18,8 @@ class RCCar:
         self.turnScale = turnScale
         self.gasScale = gasScale
         self.gear = -1
+
+        self.lights = LED(lightsGPIONum)
 
         # Servo Hz for Traxxas 6065T
         self.servoHz = 500
@@ -34,12 +37,16 @@ class RCCar:
     def toggleLights(self):
         self.lightToggle = not self.lightToggle
         if (self.lightToggle):
-            self.lights.throttle = -1
+            #self.lights.throttle = -1
+            self.lights.on()
         else:
-            self.lights.throttle = 0
+            #self.lights.throttle = 0
+            self.lights.off()
         print("Light Status:", ("On" if self.lightToggle else "Off"))
     
+    #no longer functional
     def toggleFan(self):
+        return 
         self.fanToggle = not self.fanToggle
         if (self.fanToggle):
             self.fan.throttle = 1

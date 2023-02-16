@@ -36,7 +36,7 @@ STICK_MAX = 65536
 TRIGGER_MAX = 1023
 
 # CAR INSTANCE
-car = RCCar(.25, 1)
+car = RCCar(.25, 1, 14)
 
 #evdev takes care of polling the controller in a loop
 for event in gamepad.read_loop():
@@ -47,8 +47,6 @@ for event in gamepad.read_loop():
                 car.shiftGear()
             if event.code == bBtn:
                 car.toggleLights()
-            if event.code == xBtn:
-                car.toggleFan()
 
 
     #read stick axis movement
