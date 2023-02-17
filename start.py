@@ -9,7 +9,7 @@ print("Connecting a gamepad...")
 while(True):
     try:
         time.sleep(3)
-        gamepad = InputDevice('/dev/input/event1')
+        gamepad = InputDevice('/dev/input/event2')
         if (gamepad):
             break
     except:
