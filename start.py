@@ -11,7 +11,7 @@ while(True):
         time.sleep(3)
         devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
         for device in devices:
-            if (device.name.contains("Xbox")):
+            if  "Xbox" in device.name:
                 print("Connected: ", device.name)
                 gamepad = InputDevice(device.path)
 
