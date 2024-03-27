@@ -1,4 +1,4 @@
-#import evdev
+import evdev
 from evdev import InputDevice, categorize, ecodes, list_devices
 from car_controls import RCCar
 import time
