@@ -37,7 +37,8 @@ shareBtn = 314
 
 CENTER_TOLERANCE = 350
 TRIGGER_TOLERANCE = 375
-STICK_MAX = 65536
+STICK_MAX = 65536 #left stick all the way right
+STICK_MIN = 0 #left stick all the way to the left
 TRIGGER_MAX = 1023
 
 # CAR INSTANCE
@@ -68,11 +69,10 @@ for event in gamepad.read_loop():
 
         # TURNING
         if event.code == ecodes.ABS_X:
-            print(event.value)
-            # if abs( event.value ) <= CENTER_TOLERANCE:
-            #     turnResult = .5
-            # else:
-            #     turnResult = ( event.value / (STICK_MAX / 2))
-            #     lower, upper = -1, 1
-            #     turnResult = (turnResult - lower) / (upper - lower)
-            # car.turn(turnResult)
+            if abs( event.value ) <= CENTER_TOLERANCE:
+                turnResult = .5
+            else:
+                turnResult = ( event.value / (STICK_MAX / 2))
+                lower, upper = -1, 1
+                turnResult = (turnResult - lower) / (upper - lower)
+            car.turn(turnResult)
