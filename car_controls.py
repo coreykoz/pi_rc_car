@@ -23,9 +23,9 @@ class RCCar:
 
         # Servo Hz for Traxxas 6065T
         self.servoHz = 500
-        self.leftMin = 410000
-        self.rightMin = 990000
-        self.middle = 700000
+        self.leftMin = 990000
+        self.rightMin = 1280000
+        self.middle = (self.leftMin + self.rightMin) / 2
 
         #remove later
         self.gasScale = .25
@@ -81,6 +81,3 @@ class RCCar:
                 print("Turn Ratio value needs to be between [", self.leftMin, ",", self.rightMin, "]:", str(normTurn))
         except:
             print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
-    
-    
-    
