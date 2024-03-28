@@ -40,6 +40,7 @@ TRIGGER_TOLERANCE = 375
 STICK_MAX = 65536 #left stick all the way right
 STICK_MIN = 0 #left stick all the way to the left
 TRIGGER_MAX = 1023
+TRIGGER_MIN = 0
 
 # CAR INSTANCE
 car = RCCar(.25, 1, 14)
@@ -55,11 +56,11 @@ for event in gamepad.read_loop():
                 car.toggleLights()
 
 
-    #read stick axis movement
+    #read stick axis movement and trigger movement
     elif event.type == ecodes.EV_ABS:
 
         # GAS PEDAL
-        if event.code == ecodes.ABS_RZ:
+        if event.code == ecodes.ABS_GAS:
             print("gas hit", event.value)
             # throttleResult = car.gasScale * (event.value / (TRIGGER_MAX / 2))
             # if abs( throttleResult ) <= .31:
