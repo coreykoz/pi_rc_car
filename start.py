@@ -60,19 +60,21 @@ for event in gamepad.read_loop():
 
         # GAS PEDAL
         if event.code == ecodes.ABS_RZ:
-            throttleResult = car.gasScale * (event.value / (TRIGGER_MAX / 2))
-            if abs( throttleResult ) <= .31:
-                throttleResult = 0
+            print("gas hit", event.value)
+            # throttleResult = car.gasScale * (event.value / (TRIGGER_MAX / 2))
+            # if abs( throttleResult ) <= .31:
+            #     throttleResult = 0
             # else:
             #     throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
-            car.accelerate(throttleResult)
+            # car.accelerate(throttleResult)
 
         # TURNING
         if event.code == ecodes.ABS_X:
-            if abs( event.value ) <= CENTER_TOLERANCE:
-                turnResult = .5
-            else:
-                turnResult = ( event.value / (STICK_MAX / 2))
-                lower, upper = -1, 1
-                turnResult = (turnResult - lower) / (upper - lower)
-            car.turn(turnResult)
+            print("turn hit", event.value)
+            # if abs( event.value ) <= CENTER_TOLERANCE:
+            #     turnResult = .5
+            # else:
+            #     turnResult = ( event.value / (STICK_MAX / 2))
+            #     lower, upper = -1, 1
+            #     turnResult = (turnResult - lower) / (upper - lower)
+            # car.turn(turnResult)
