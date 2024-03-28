@@ -23,9 +23,9 @@ class RCCar:
 
         # Servo Hz for Traxxas 6065T
         self.servoHz = 500
-        self.leftMin = 990000
-        self.rightMin = 1280000
-        self.middle = (self.leftMin + self.rightMin) / 2
+        self.servoLeftMin = 410000
+        self.servoRightMax = 990000
+        self.servoMiddle = (self.servoLeftMin + self.servoRightMax) / 2
 
         #remove later
         self.gasScale = 1
@@ -64,21 +64,22 @@ class RCCar:
         print("Shifted Gear:", ("Drive" if self.gearToggle else "Reverse"))
 
     # expects an input from [-1, 1]
+    # where negative implies backwards and a higher abs(throttle) value is faster
     def accelerate(self, throttle):
         try:
             self.driveMotor.throttle = throttle * self.gear
         except:
             print("Throttle value needs to be between [-1, 1]:", str(throttle))
 
-
-    # expects an input from [0-1]
+    # expects an input from [0,1]
+    # where 0 is turning left and 1 is turning right
     def turn(self, turnRatio):
         try:
-            self.pi.hardware_PWM(18, self.servoHz, int(turnRatio))
-            # normTurn = self.leftMin + (self.rightMin - self.leftMin) * turnRatio
-            # if normTurn <= self.rightMin and normTurn >= self.leftMin:
-            #
-            # else:
-            #     print("Turn Ratio value needs to be between [", self.leftMin, ",", self.rightMin, "]:", str(normTurn))
+            # need to adjust value from [0,1] range to fit servo's min/max values
+            adjustedTurn = self.servoLeftMin + (self.servoRightMax - self.servoLeftMin) * turnRatio
+            if adjustedTurn <= self.servoRightMax and adjustedTurn >= self.servoLeftMin:
+                self.pi.hardware_PWM(18, self.servoHz, int(adjustedTurn))
+            else:
+                print("Turn Ratio value needs to be between [", self.servoLeftMin, ",", self.servoRightMax, "]:", str(adjustedTurn))
         except:
             print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))

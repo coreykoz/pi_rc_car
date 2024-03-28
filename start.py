@@ -77,10 +77,12 @@ for event in gamepad.read_loop():
             # normalize turning scale from [0, 1]
             turnResult = (event.value - STICK_MIN) / (STICK_MAX - STICK_MIN)
 
+            if turnResult > .45 and turnResult < .55:
+                turnResult = .5
+            car.turn(turnResult)
             # if abs(event.value) <= CENTER_TOLERANCE:
             #     turnResult = .5
             # else:
             #     turnResult = ( event.value / (STICK_MAX / 2))
             #     lower, upper = -1, 1
             #     turnResult = (turnResult - lower) / (upper - lower)
-            car.turn(turnResult)
