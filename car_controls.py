@@ -28,7 +28,7 @@ class RCCar:
         self.middle = (self.leftMin + self.rightMin) / 2
 
         #remove later
-        self.gasScale = .25
+        self.gasScale = 1
         self.turnScale = 1
 
         self.turnServo.throttle = 1

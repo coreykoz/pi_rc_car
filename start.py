@@ -36,11 +36,12 @@ startBtn = 315
 shareBtn = 314
 
 CENTER_TOLERANCE = 350
-TRIGGER_TOLERANCE = 375
+# TRIGGER_TOLERANCE = 375
 STICK_MAX = 65536 #left stick all the way right
 STICK_MIN = 0 #left stick all the way to the left
 TRIGGER_MAX = 1023
 TRIGGER_MIN = 0
+MOTOR_LOAD_MIN = .31
 
 # CAR INSTANCE
 car = RCCar(.25, 1, 14)
@@ -61,21 +62,25 @@ for event in gamepad.read_loop():
 
         # GAS PEDAL
         if event.code == ecodes.ABS_GAS:
-            print("gas hit", event.value)
-            # throttleResult = car.gasScale * (event.value / (TRIGGER_MAX / 2))
-            # if abs( throttleResult ) <= .31:
-            #     throttleResult = 0
-            # else:
-            #     throttleResult = gasScale * (event.value / (TRIGGER_MAX / 2)) * gear
-            # car.accelerate(throttleResult)
+            # normalize gas pedal press [0, 1]
+            throttleResult = (event.value - TRIGGER_MIN) / (TRIGGER_MAX - TRIGGER_MIN)
+
+            #make sure power is high enough to move motor (under load)
+            if abs(throttleResult) <= MOTOR_LOAD_MIN:
+                throttleResult = 0
+
+            car.accelerate(throttleResult)
+
 
         # TURNING
         if event.code == ecodes.ABS_X:
-            print("turn hit", event.value)
-            # if abs( event.value ) <= CENTER_TOLERANCE:
+            # normalize turning scale from [0, 1]
+            turnResult = (event.value - STICK_MIN) / (STICK_MAX - STICK_MIN)
+
+            # if abs(event.value) <= CENTER_TOLERANCE:
             #     turnResult = .5
             # else:
             #     turnResult = ( event.value / (STICK_MAX / 2))
             #     lower, upper = -1, 1
             #     turnResult = (turnResult - lower) / (upper - lower)
-            # car.turn(turnResult)
+            car.turn(turnResult)
