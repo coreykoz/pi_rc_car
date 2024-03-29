@@ -47,34 +47,40 @@ MOTOR_LOAD_MIN = .31
 car = RCCar(.25, 1, 14)
 
 #evdev takes care of polling the controller in a loop
-for event in gamepad.read_loop():
-    if event.type == ecodes.EV_KEY:
-        # on button press
-        if event.value == 1:
-            if event.code == aBtn:
-                car.shiftGear()
-            if event.code == bBtn:
-                car.toggleLights()
+try:
+    for event in gamepad.read_loop():
+        if event.type == ecodes.EV_KEY:
+            # on button press
+            if event.value == 1:
+                if event.code == aBtn:
+                    car.shiftGear()
+                if event.code == bBtn:
+                    car.toggleLights()
 
 
-    #read stick axis movement and trigger movement
-    elif event.type == ecodes.EV_ABS:
+        #read stick axis movement and trigger movement
+        elif event.type == ecodes.EV_ABS:
 
-        # GAS PEDAL
-        if event.code == ecodes.ABS_GAS:
-            # normalize gas pedal press [0, 1]
-            throttleResult = (event.value - TRIGGER_MIN) / (TRIGGER_MAX - TRIGGER_MIN)
+            # GAS PEDAL
+            if event.code == ecodes.ABS_GAS:
+                # normalize gas pedal press [0, 1]
+                throttleResult = (event.value - TRIGGER_MIN) / (TRIGGER_MAX - TRIGGER_MIN)
 
-            #make sure power is high enough to move motor (under load)
-            if abs(throttleResult) <= MOTOR_LOAD_MIN:
-                throttleResult = 0
-            car.accelerate(throttleResult)
+                #make sure power is high enough to move motor (under load)
+                if abs(throttleResult) <= MOTOR_LOAD_MIN:
+                    throttleResult = 0
+                car.accelerate(throttleResult)
 
-        # TURNING
-        if event.code == ecodes.ABS_X:
-            # normalize turning scale from [0, 1]
-            turnResult = (event.value - STICK_MIN) / (STICK_MAX - STICK_MIN)
+            # TURNING
+            if event.code == ecodes.ABS_X:
+                # normalize turning scale from [0, 1]
+                turnResult = (event.value - STICK_MIN) / (STICK_MAX - STICK_MIN)
 
-            if turnResult > .45 and turnResult < .55:
-                turnResult = .5
-            car.turn(turnResult)
+                if turnResult > .45 and turnResult < .55:
+                    turnResult = .5
+                car.turn(turnResult)
+except Exception as error:
+    # in case something disconnects
+    car.accelerate(0)
+    car.turn(.5)
+    print(error)
