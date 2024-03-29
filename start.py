@@ -80,7 +80,6 @@ for event in gamepad.read_loop():
             if turnResult > .45 and turnResult < .55:
                 turnResult = .5
             car.turn(turnResult)
-            print(turnResult)
             # if abs(event.value) <= CENTER_TOLERANCE:
             #     turnResult = .5
             # else:
