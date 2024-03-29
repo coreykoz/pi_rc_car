@@ -79,7 +79,6 @@ class RCCar:
             adjustedTurn = self.servoLeftMin + (self.servoRightMax - self.servoLeftMin) * turnRatio
             if adjustedTurn <= self.servoRightMax and adjustedTurn >= self.servoLeftMin:
                 self.pi.hardware_PWM(18, self.servoHz, int(adjustedTurn))
-                print(adjustedTurn)
             else:
                 print("Adjusted Turn Ratio value needs to be between [", self.servoLeftMin, ",", self.servoRightMax, "]:", str(adjustedTurn))
         except:

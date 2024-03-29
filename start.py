@@ -68,9 +68,7 @@ for event in gamepad.read_loop():
             #make sure power is high enough to move motor (under load)
             if abs(throttleResult) <= MOTOR_LOAD_MIN:
                 throttleResult = 0
-
             car.accelerate(throttleResult)
-            print(throttleResult)
 
         # TURNING
         if event.code == ecodes.ABS_X:
@@ -80,9 +78,3 @@ for event in gamepad.read_loop():
             if turnResult > .45 and turnResult < .55:
                 turnResult = .5
             car.turn(turnResult)
-            # if abs(event.value) <= CENTER_TOLERANCE:
-            #     turnResult = .5
-            # else:
-            #     turnResult = ( event.value / (STICK_MAX / 2))
-            #     lower, upper = -1, 1
-            #     turnResult = (turnResult - lower) / (upper - lower)
