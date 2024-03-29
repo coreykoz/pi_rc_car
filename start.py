@@ -70,7 +70,7 @@ for event in gamepad.read_loop():
                 throttleResult = 0
 
             car.accelerate(throttleResult)
-
+            print(throttleResult)
 
         # TURNING
         if event.code == ecodes.ABS_X:
@@ -80,6 +80,7 @@ for event in gamepad.read_loop():
             if turnResult > .45 and turnResult < .55:
                 turnResult = .5
             car.turn(turnResult)
+            print(turnResult)
             # if abs(event.value) <= CENTER_TOLERANCE:
             #     turnResult = .5
             # else:
