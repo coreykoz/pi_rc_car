@@ -38,15 +38,15 @@ class RCCar:
         self.pwm.start(50)
 
     
-    def toggleLights(self):
-        self.lightToggle = not self.lightToggle
-        if (self.lightToggle):
-            #self.lights.throttle = -1
-            #self.lights.on()
-        else:
-            #self.lights.throttle = 0
-            #self.lights.off()
-        print("Light Status:", ("On" if self.lightToggle else "Off"))
+    # def toggleLights(self):
+    #     self.lightToggle = not self.lightToggle
+    #     if (self.lightToggle):
+    #         #self.lights.throttle = -1
+    #         #self.lights.on()
+    #     else:
+    #         #self.lights.throttle = 0
+    #         #self.lights.off()
+    #     print("Light Status:", ("On" if self.lightToggle else "Off"))
     
     #no longer functional
     def toggleFan(self):
