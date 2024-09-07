@@ -20,7 +20,7 @@ class RCCar:
         self.gasScale = gasScale
         self.gear = -1
 
-        self.lights = LED(lightsGPIONum)
+        # self.lights = LED(lightsGPIONum)
 
         # Servo Hz for Traxxas 6065T
         self.servoHz = 500
@@ -42,10 +42,10 @@ class RCCar:
         self.lightToggle = not self.lightToggle
         if (self.lightToggle):
             #self.lights.throttle = -1
-            self.lights.on()
+            #self.lights.on()
         else:
             #self.lights.throttle = 0
-            self.lights.off()
+            #self.lights.off()
         print("Light Status:", ("On" if self.lightToggle else "Off"))
     
     #no longer functional
