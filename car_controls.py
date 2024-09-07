@@ -1,6 +1,7 @@
 from adafruit_motorkit import MotorKit
-import pigpio
-from gpiozero import LED
+# import pigpio
+# from gpiozero import LED
+from rpi_hardware_pwm import HardwarePWM
 
 class RCCar:
 
@@ -32,7 +33,10 @@ class RCCar:
         self.turnScale = 1
 
         self.turnServo.throttle = 1
-        self.pi = pigpio.pi()
+        # self.pi = pigpio.pi()
+        self.pwm = HardwarePWM(pwm_channel = 0, hz=self.servoHz, chip=2)
+        self.pwm.start(50)
+
     
     def toggleLights(self):
         self.lightToggle = not self.lightToggle
@@ -78,7 +82,8 @@ class RCCar:
             # need to adjust value from [0,1] range to fit servo's min/max values
             adjustedTurn = self.servoLeftMin + (self.servoRightMax - self.servoLeftMin) * turnRatio
             if adjustedTurn <= self.servoRightMax and adjustedTurn >= self.servoLeftMin:
-                self.pi.hardware_PWM(18, self.servoHz, int(adjustedTurn))
+                # self.pi.hardware_PWM(18, self.servoHz, int(adjustedTurn))
+                self.pwm.change_duty_cycle(int(adjustedTurn))
             else:
                 print("Adjusted Turn Ratio value needs to be between [", self.servoLeftMin, ",", self.servoRightMax, "]:", str(adjustedTurn))
         except:
