@@ -35,7 +35,7 @@ class RCCar:
         self.turnServo.throttle = 1
         # self.pi = pigpio.pi()
         self.pwm = HardwarePWM(pwm_channel=2, hz=self.servoHz, chip=2)
-        self.pwm.start(0)
+        self.pwm.start(75)
 
     
     # def toggleLights(self):
