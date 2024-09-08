@@ -76,8 +76,8 @@ try:
                 # normalize turning scale from [0, 1]
                 turnResult = (event.value - STICK_MIN) / (STICK_MAX - STICK_MIN)
 
-                if turnResult > .45 and turnResult < .55:
-                    turnResult = .5
+                # if turnResult > .45 and turnResult < .55:
+                #     turnResult = .5
                 car.turn(turnResult)
                 print(turnResult, turnResult * 100)
 except Exception as error:
