@@ -24,7 +24,7 @@ class RCCar:
 
         # Servo Hz for Traxxas 6065T
         self.servoHz = 500
-        self.servoLeftMin = 41
+        self.servoLeftMin = 50 #41
         self.servoRightMax = 99
         self.servoMiddle = (self.servoLeftMin + self.servoRightMax) / 2
 
@@ -81,7 +81,7 @@ class RCCar:
         try:
             # need to adjust value from [0,1] range --> fit servo's min/max values
             adjustedTurn = self.servoLeftMin + (self.servoRightMax - self.servoLeftMin) * turnRatio
-            print(adjustedTurn)
+
             if adjustedTurn <= self.servoRightMax and adjustedTurn >= self.servoLeftMin:
                 # self.pi.hardware_PWM(18, self.servoHz, int(adjustedTurn))
                 self.pwm.change_duty_cycle(int(adjustedTurn))
