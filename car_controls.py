@@ -81,6 +81,7 @@ class RCCar:
         try:
             # need to adjust value from [0,1] range to fit servo's min/max values
             adjustedTurn = self.servoLeftMin + (self.servoRightMax - self.servoLeftMin) * turnRatio
+            print(adjustedTurn)
             if adjustedTurn <= self.servoRightMax and adjustedTurn >= self.servoLeftMin:
                 # self.pi.hardware_PWM(18, self.servoHz, int(adjustedTurn))
                 self.pwm.change_duty_cycle(int(adjustedTurn))
