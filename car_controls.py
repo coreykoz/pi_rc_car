@@ -86,5 +86,7 @@ class RCCar:
                 self.pwm.change_duty_cycle(int(adjustedTurn))
             else:
                 print("Adjusted Turn Ratio value needs to be between [", self.servoLeftMin, ",", self.servoRightMax, "]:", str(adjustedTurn))
-        except:
+        except Exception:
+            print(Exception)
+        else:
             print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
