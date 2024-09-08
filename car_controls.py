@@ -35,7 +35,7 @@ class RCCar:
         self.turnServo.throttle = 1
         # self.pi = pigpio.pi()
         self.pwm = HardwarePWM(pwm_channel=2, hz=self.servoHz, chip=2)
-        self.pwm.start(50)
+        self.pwm.start(0)
 
     
     # def toggleLights(self):
@@ -90,5 +90,5 @@ class RCCar:
             self.pwm.change_duty_cycle(int(turnRatio * 100))
         except Exception as error:
             print("Turning Exception has occured!: ", error)
-        else:
-            print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
+        # else:
+        #     print("Turn Ratio value needs to be between [0, 1]:", str(turnRatio))
