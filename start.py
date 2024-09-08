@@ -79,6 +79,7 @@ try:
                 if turnResult > .45 and turnResult < .55:
                     turnResult = .5
                 car.turn(turnResult)
+                print(turnResult, turnResult * 100)
 except Exception as error:
     # in case something disconnects
     car.accelerate(0)
