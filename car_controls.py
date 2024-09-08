@@ -79,7 +79,7 @@ class RCCar:
     # where 0 is turning left and 1 is turning right
     def turn(self, turnRatio):
         try:
-            # need to adjust value from [0,1] range to fit servo's min/max values
+            # need to adjust value from [0,1] range --> fit servo's min/max values
             adjustedTurn = self.servoLeftMin + (self.servoRightMax - self.servoLeftMin) * turnRatio
             print(adjustedTurn)
             if adjustedTurn <= self.servoRightMax and adjustedTurn >= self.servoLeftMin:
@@ -87,7 +87,7 @@ class RCCar:
                 self.pwm.change_duty_cycle(int(adjustedTurn))
             else:
                 print("Adjusted Turn Ratio value needs to be between [", self.servoLeftMin, ",", self.servoRightMax, "]:", str(adjustedTurn))
-            self.pwm.change_duty_cycle(int(turnRatio * 100))
+            # self.pwm.change_duty_cycle(int(turnRatio * 100))
         except Exception as error:
             print("Turning Exception has occured!: ", error)
         # else:
